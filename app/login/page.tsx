@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image';
 import { useState, useRef } from 'react'
+import { reqGet } from '@/utils/request';
 
 function MyButton() {
     return (
@@ -16,8 +17,10 @@ export default function Login() {
     const inputEmail = useRef(null);
     const inputPass = useRef(null);
     
-    function handleClick ()  {
+    async function handleClick ()  {
         alert('You clicked me!' + (inputEmail?.current?.value ?? '') + ':' + inputPass.current.value);
+        const res = await reqGet('https://learn-nest-production.up.railway.app/w100', {});
+        console.log(res)
     }
 
     return <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
