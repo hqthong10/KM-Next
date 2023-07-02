@@ -18,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <HeaderBar />
-        {children}
+        <div className='pt-[60px]'>
+          {children}
+        </div>
       </body>
     </html>
   )
