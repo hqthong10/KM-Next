@@ -14,7 +14,7 @@ const callRequest = async (method: any, path: string, param: any) => {
     try {
         const res = await fetch(path, {
             method,
-            [[_P, _D, _PA, _PU].includes(method) ? 'body' : 'query']: JSON.stringify(param),
+            [[_P, _D, _PA, _PU].includes(method) ? 'body' : 'query']: param,
             headers: {
                 'Content-Type': 'application/json',
                 // 'cache-control': 'no-cache'

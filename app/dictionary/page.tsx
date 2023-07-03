@@ -3,14 +3,15 @@ import Image from 'next/image'
 // import React, { useEffect, useState } from 'react';
 
 async function getData() {
-  const res = await reqGet('http://localhost:3000/api/word/list', {});
+  const res = await reqGet('http://localhost:3000/api/word', {});
   return res;
 }
 
 async function addWord() {
-  const res = await reqPost('http://localhost:3000/api/word/add', {
-      WV101: 'can',
-      WV102: 'có thể',
+  const res = await fetch('http://localhost:3001/api/word', {
+      method: 'POST'
+      // WV101: 'can',
+      // WV102: 'có thể',
     }
   );
   return res;
