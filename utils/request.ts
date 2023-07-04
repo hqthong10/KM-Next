@@ -1,3 +1,4 @@
+import path from "path";
 const _G = 'GET';
 const _P = 'POST';
 const _D = 'DELETE';
@@ -12,15 +13,21 @@ export const reqPut = (path: string, data: any) => callRequest(_PU, path, data);
 
 const callRequest = async (method: any, path: string, param: any) => {
     try {
-        const res = await fetch(path, {
+        const l = 'http://localhost:3000/';
+        
+        console.log('111', l + path);
+        const res = await fetch(l + path, {
             method,
             [[_P, _D, _PA, _PU].includes(method) ? 'body' : 'query']: JSON.stringify(param),
             headers: {
-                'Content-Type': 'application/json',
+                Accept: "application/json",
+                'Content-Type': 'application/json;charset=UTF-8',
                 // 'cache-control': 'no-cache'
             }
         });
+        console.log('333');
         const { data } = await res.json();
+        console.log('444');
         return data;
     } catch (error: any) {
         console.log('error ne')

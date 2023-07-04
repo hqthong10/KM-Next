@@ -1,13 +1,14 @@
+'use client'
 import { reqGet, reqPost } from '@/utils/request';
 import Image from 'next/image';
-// import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 async function getData() {
     const res = await reqGet('http://localhost:3000/api/word', {});
     return res;
 }
 
-async function addWord() {
+const addWord = async () => {
     // const res = await fetch('http://localhost:3001/api/word', {
     //     method: 'POST',
     //     body: JSON.stringify({
@@ -17,7 +18,7 @@ async function addWord() {
     // });
 
     const res = await reqPost(
-        'http://localhost:3001/api/word',
+        'api/word',
         {
             WV101: 'can',
             WV102: 'có thể'
@@ -27,26 +28,29 @@ async function addWord() {
     return res;
 }
 
-export default async function Dictionary() {
+  export default async function Dictionary() {
     // const [words, setWords] = useState([]);
     let words = [];
 
-    await addWord();
     // const dt = await getData();
     // words = dt.elements;
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await fetch('/api/my-endpoint');
-    //       const jsonData = await response.json();
-    //       // setData(jsonData);
-    //     } catch (error) {
-    //       console.error('Error fetching data:', error);
-    //     }
-    //   };
+    useEffect(() => {
+        // await addWord();
+      const fetchData = async () => {
+        try {
+          const response = await reqPost('api/word', {
+            WV101: 'can',
+            WV102: 'có thể'
+          });
+          const jsonData = await response.json();
+          // setData(jsonData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
 
-    //   fetchData();
-    // }, []);
+      fetchData();
+    }, []);
 
     return (
         <main className="flex min-h-screen flex-col p-4 bg-white">
