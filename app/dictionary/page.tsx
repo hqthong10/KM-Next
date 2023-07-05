@@ -36,7 +36,7 @@ const addWord = async () => {
     // words = dt.elements;
     useEffect(() => {
         // await addWord();
-      const fetchData = async () => {
+      const fetchData = async () => { 
         try {
           const response = await reqPost('api/word', {
             WV101: 'can',
