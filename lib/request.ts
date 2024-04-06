@@ -13,14 +13,12 @@ export const reqPut = (path: string, data: any) => callRequest(_PU, path, data);
 
 const callRequest = async (method: any, path: string, param: any) => {
     try {
-        const l = 'http://localhost:3000/';
-        const res = await fetch(l + path, {
+        const res = await fetch(path, {
             method,
             [[_P, _D, _PA, _PU].includes(method) ? 'body' : 'query']: JSON.stringify(param),
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
-                // 'cache-control': 'no-cache'
             }
         });
         const { data } = await res.json();

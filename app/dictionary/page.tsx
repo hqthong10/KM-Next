@@ -1,9 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { reqGet, reqPost } from '@/utils/request';
 import clsx from 'clsx';
-import KmButton from '@/components/UI/button'
-
 
 
 export default async function Dictionary() {
@@ -36,7 +33,7 @@ export default async function Dictionary() {
     <main className="flex min-h-screen flex-col p-4 bg-white">
 
       chào bạn
-      <KmButton onClick={actionClickBtn}>hihi click</KmButton>
+      <button onClick={actionClickBtn}>hihi click</button>
 
     </main>
   );
