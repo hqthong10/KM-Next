@@ -1,34 +1,38 @@
 'use client'
-import Image from 'next/image';
-import { useState, useRef } from 'react'
-import { reqGet } from '@/utils/request';
-
-function MyButton() {
-    return (
-        <button>
-            I'm a button
-        </button>
-    );
-}
+import { useState, useRef, FormEvent, ReactEventHandler } from 'react';
+import { useRouter } from 'next/navigation';
+import { reqPost } from '@/lib/request';
+import { Button, Input } from '@nextui-org/react';
 
 export default function Login() {
-    const [count, setCount] = useState(0);
-
-    const inputEmail: any = useRef(null);
-    const inputPass: any = useRef(null);
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const router = useRouter();
 
     async function handleClick() {
-        alert('You clicked me!' + (inputEmail?.current?.value ?? '') + ':' + inputPass.current.value);
-        const res = await reqGet('https://learn-nest-production.up.railway.app/w100', {});
-        console.log(res)
+        // const rs = await fetch('/api/auth/login', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         email,
+        //         password: pass
+        //     })
+        // })
+        // const result = await rs.json();
+
+        const result = await reqPost('/api/auth/login', {
+            email,
+            password: pass
+        });
+        if (result?.data?.PN100 > 0) {
+            router.push('/');
+        }
     }
 
     return <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
         <div className='w-[300px] flex flex-col bg-white p-8 gap-3'>
-            <input ref={inputEmail} placeholder='Email' />
-            <input ref={inputPass} placeholder='Password' />
-            <button onClick={handleClick}>Login</button>
-            <MyButton />
+            <Input type='email' value={email} label="Email" placeholder='Email' onChange={(e: any) => setEmail(e.target.value)} />
+            <Input type='password' value={pass} placeholder='Password' onChange={(e: any) => setPass(e.target.value)} />
+            <Button onClick={handleClick}>Login</Button>
         </div>
     </main>;
 }

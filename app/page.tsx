@@ -1,11 +1,10 @@
-import { reqGet } from '@/utils/request'
+import LearnComp from '@/components/LearnComp'
 
-
-export default async function Home() {
-  
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      hi
-    </main>
-  )
+export default function Home() {
+    return (
+        <main className="flex min-h-screen flex-col items-center justify-center">
+            Home a
+            <LearnComp title="chao cac ban" content="nội dung">s</LearnComp>
+        </main>
+    )
 }
