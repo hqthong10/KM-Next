@@ -1,7 +1,6 @@
 import './globals.css'
 import { inter } from '@/app/fonts';
-import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { getSession } from '@/lib/session';
+import { Providers } from "./providers";
 import HeaderBar from '@/components/HeaderBar';
 
 export const metadata = {
@@ -14,17 +13,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getSession();
-  const ssuser = session.user ?? {};
-
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <HeaderBar />
-        {ssuser.NV103 ?? ''}
-        <div className='pt-[60px]'>
-          <AntdRegistry>{children}</AntdRegistry>
-        </div>
+    <html lang="en" className='light'>
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
+      <body className={`${inter.className}`}>
+        <Providers>
+          <HeaderBar />
+          <div className='pt-[60px]'>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   )

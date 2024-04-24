@@ -1,12 +1,10 @@
 'use client'
-import { useState, useRef, FormEvent } from 'react';
+import { useState, useRef, FormEvent, ReactEventHandler } from 'react';
 import { useRouter } from 'next/navigation';
 import { reqPost } from '@/lib/request';
+import { Button, Input } from '@nextui-org/react';
 
-import { Button } from "antd";
-import { Input } from "antd";
-
-export default async function Login() {
+export default function Login() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const router = useRouter();
@@ -32,8 +30,8 @@ export default async function Login() {
 
     return <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
         <div className='w-[300px] flex flex-col bg-white p-8 gap-3'>
-            <Input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-            <Input value={pass} placeholder='Password' type='password' onChange={(e) => setPass(e.target.value)} />
+            <Input type='email' value={email} label="Email" placeholder='Email' onChange={(e: any) => setEmail(e.target.value)} />
+            <Input type='password' value={pass} placeholder='Password' onChange={(e: any) => setPass(e.target.value)} />
             <Button onClick={handleClick}>Login</Button>
         </div>
     </main>;
