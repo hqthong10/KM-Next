@@ -4,6 +4,7 @@ import { getSession } from '@/lib/session';
 
 export async function POST(request: Request) {
     try {
+        console.log('route handle login');
         const body = await request.json();
         const res = await fetch('http://52.62.138.105:3000/auth/login', {
             method: 'POST',
