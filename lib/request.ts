@@ -5,7 +5,7 @@ const _P = 'POST';
 const _D = 'DELETE';
 const _PA = 'PATCH';
 const _PU = 'PUT';
-// const URL_SERVER = 'http://52.62.138.105:3000';
+// const URL_SERVER = 'http://13.54.242.1:3001';
 const URL_SERVER = 'http://192.168.1.62:10001';
 // const URL_SERVER = 'http://localhost:10001';
 
