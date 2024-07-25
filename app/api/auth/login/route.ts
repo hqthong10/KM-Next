@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getSession } from '@/lib/session';
+import { API_SERVER_HOST } from '@/utils/constant';
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const res = await fetch('http://52.62.138.105:3000/auth/login', {
+        
+        const res = await fetch(`${API_SERVER_HOST}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,6 +1,4 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getSession } from '@/lib/session';
 
 export function middleware(request: NextRequest) {
     const currentUser = request.cookies.get('token')?.value;

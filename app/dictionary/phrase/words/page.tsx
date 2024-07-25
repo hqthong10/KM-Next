@@ -15,13 +15,12 @@ export default function Page() {
       }
     };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
     <main className="flex min-h-screen flex-col p-4 bg-white">
-        Welcome to page dictionary
-        work {words.length}
+      Welcome to page word
     </main>
   );
 }

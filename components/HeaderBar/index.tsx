@@ -9,9 +9,10 @@ export default async function HeaderBar() {
         <header className={'fixed z-20 w-full top-0 flex h-[60px] items-center bg-white gap-5 px-4 ' + styles.shadow}>
             <Image src={'/images/logo.png'} alt='piepmark' width={100} height={50} />
             <Link href="/">Home</Link>
+            <Link href="/posts">Posts</Link>
             <Link href="/dictionary">Dictionary</Link>
-            <Link href="/phrase">Phrase</Link>
-            <Link href="/posts">Post</Link>
+            <Link href="/dictionary/phrase">Phrase</Link>
+            <Link href="/dictionary/phrase/words">Words</Link>
             <span className='w-full'></span>
             {user?.PN100 > 0 ? (
                 <span className='flex-none inline-flex items-center gap-1'>

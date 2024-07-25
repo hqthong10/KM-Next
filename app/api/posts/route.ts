@@ -1,15 +1,18 @@
 import { NextResponse } from 'next/server';
 import { reqGet } from '@/lib/request';
+import { API_SERVER_HOST } from '@/utils/constant';
 
 export async function GET(request: Request) {
-    const res = await fetch('http://localhost:3020/w100', {
+    const res = await fetch(`${API_SERVER_HOST}/p100`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         }
     });
     const result = await res.json();
-    // const result = await reqGet('/w100', {}, {});
+    
+    // const result = await reqGet('/p100', {}, {});
+
     return NextResponse.json(result);
 }
 
