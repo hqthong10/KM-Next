@@ -1,6 +1,7 @@
 import './globals.css'
 import { inter } from '@/app/fonts';
-import { Providers } from "./providers";
+import { Providers } from "@/providers/providers";
+import { SessionProvider } from "next-auth/react"
 import HeaderBar from '@/components/HeaderBar';
 
 export const metadata = {
@@ -18,10 +19,12 @@ export default async function RootLayout({
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <body className={`${inter.className}`}>
         <Providers>
-          <HeaderBar />
-          <div className='pt-[60px]'>
-            {children}
-          </div>
+          <SessionProvider>
+            <HeaderBar />
+            <div className='pt-[60px]'>
+              {children}
+            </div>
+            </SessionProvider>
         </Providers>
       </body>
     </html>

@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { reqGet } from '@/lib/request';
 import { API_SERVER_HOST } from '@/utils/constant';
 
 export async function GET(request: Request) {
