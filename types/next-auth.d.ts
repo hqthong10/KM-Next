@@ -2,17 +2,40 @@ import NextAuth, { type DefaultSession} from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 interface IUser {
+    // user id mongo
     _id?: string;
+
+    // user id hand
     PN100?: number;
+
+    // username
     NV101?: string;
+
+    // Email
     NV103?: string;
+
+    // First Name
     NV106?: string;
+
+    // Last Name
     NV107?: string;
+
+    // Avatar
     NV108?: string;
+
+    // Birthdate
     NV109?: string;
+
+    // Language
     NV110?: string;
+
+    // Gender
     NV111?: string;
+
+    //
     accessToken?: string;
+
+    //
     refreshToken?: string;
 }
 

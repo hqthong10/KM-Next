@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             authorize: async (credentials) => {
                 let user = null;
 
-                const result = await sendRequest<any>({  
+                const result = await sendRequest<any>({
                     url: `http://localhost:3040/api/auth/login`,
                     method: 'POST',
                     data: {

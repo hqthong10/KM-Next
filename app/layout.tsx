@@ -3,6 +3,7 @@ import { inter } from '@/app/fonts';
 import { Providers } from "@/providers/providers";
 import { SessionProvider } from "next-auth/react"
 import HeaderBar from '@/components/HeaderBar';
+import SideBar from '@/components/SideBar';
 
 export const metadata = {
   title: 'Learn next',
@@ -20,9 +21,11 @@ export default async function RootLayout({
       <body className={`${inter.className}`}>
         <Providers>
           <SessionProvider>
-            <HeaderBar />
-            <div className='pt-[60px]'>
-              {children}
+            <div className='flex'>
+              <SideBar  />
+              <div className='w-[calc(100% - 250px)] pl-[250px]'>
+                  {children}
+              </div>
             </div>
             </SessionProvider>
         </Providers>
