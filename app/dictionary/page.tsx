@@ -46,6 +46,9 @@ export default function Page() {
 
     return (
         <main className="flex min-h-screen flex-col p-4 bg-background gap-3">
+            <div className='flex justify-between items-center'>
+
+            </div>
             <div className="div-box bg-white p-2 rounded-small">
                 <h3 className="font-semibold">Thống kê</h3>
                 <p>Tổng: {words.length}</p>
