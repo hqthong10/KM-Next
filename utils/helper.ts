@@ -11,3 +11,15 @@ export const shuffle = (array: any[]) => {
     }
     return array;
 };
+
+export const formatNumber = (number: number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export const formatCurrency = (number: number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' đ';
+};
+
+export const createArrayIndexes = (length: number) => {
+    return Array.from({ length }, (_, index) => index);
+}

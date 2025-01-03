@@ -1,6 +1,6 @@
 import queryString from 'query-string';
-import { auth } from "@/auth";
-import { useSession } from "next-auth/react";
+import { auth } from '@/auth';
+import { useSession, getSession } from 'next-auth/react';
 import { IUser } from '@/types/next-auth';
 
 export interface IRequest {
@@ -20,48 +20,57 @@ export interface IResponse {
 }
 
 export const sendRequest = async <T>(props: IRequest) => {
-    let { url, method, data, useCredentials = false, headers = {}, nextOption = {} } = props;
-    let accessToken = '';
+    try {
+        let { url, method, data, useCredentials = false, headers = {}, nextOption = {} } = props;
+        let accessToken = '';
 
-    if(typeof window == "undefined") {
-        // server
-        const session = await auth();
-        accessToken = (session?.user as IUser).accessToken || '';
-    } else {
-        // client
-        const { data: session } = useSession();
-        accessToken = (session?.user as IUser).accessToken || '';
-    }
-
-    const options: any = {
-        method,
-        headers: new Headers({
-            'content-type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-            ...headers
-        }),
-        body: data ? JSON.stringify(data) : null,
-        ...nextOption
-    };
-
-    if(method.toUpperCase() === 'GET') {
-        delete options.body;
-        url += `?${queryString.stringify(data || {})}`;
-    }
-
-    if (useCredentials) options.credentials = 'include';
-
-    return fetch(url, options).then(async (res) => {
-        if (res.ok) {
-            return res.json() as T;
+        if (typeof window == 'undefined') {
+            // server
+            const session = await auth();
+            accessToken = (session?.user as IUser)?.accessToken || '';
         } else {
-            return res.json().then((json) => {
-                return {
-                    statusCode: res.status,
-                    message: json?.message ?? '',
-                    error: json?.error ?? ''
-                };
-            });
+            // client
+            // const session: any = await getSession();
+            // accessToken = (session?.user as IUser)?.accessToken || '';
+            accessToken = '';
         }
-    });
+
+        const options: any = {
+            method,
+            headers: new Headers({
+                'content-type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+                ...headers
+            }),
+            body: data ? JSON.stringify(data) : null,
+            ...nextOption
+        };
+
+        if (method.toUpperCase() === 'GET') {
+            delete options.body;
+            url += `?${queryString.stringify(data || {})}`;
+        }
+
+        if (useCredentials) options.credentials = 'include';
+
+        return fetch(url, options).then(async (res) => {
+            if (res.ok) {
+                return res.json() as T;
+            } else {
+                return res.json().then((json) => {
+                    return {
+                        statusCode: res.status,
+                        message: json?.message ?? '',
+                        error: json?.error ?? ''
+                    };
+                });
+            }
+        });
+    } catch (error) {
+        console.error('Error sending request:', error);
+        return {
+            statusCode: 500,
+            message: 'Error sending request to server'
+        };
+    }
 };

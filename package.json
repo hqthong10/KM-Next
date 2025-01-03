@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "PORT=3040 next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "PORT=3040 next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "sharp": "^0.33.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
     "@svgr/webpack": "^8.1.0",
     "@types/markdown-it": "^14.1.1",
     "@types/node": "20.3.1",

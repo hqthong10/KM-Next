@@ -6,8 +6,6 @@ import { Button, useDisclosure } from '@nextui-org/react';
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter } from '@nextui-org/react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@nextui-org/modal';
 
-import Close from '@icons/camera.svg';
-
 export default function Page() {
     const [words, setWords] = useState<any>([]);
     const [wordLearns, setWordLearns] = useState<any>([]);

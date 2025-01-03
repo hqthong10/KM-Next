@@ -6,6 +6,7 @@ import { InvalidEmailPasswordError } from './utils/error';
 import { sendRequest } from './libs/request';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    trustHost: true,
     providers: [
         Credentials({
             // You can specify which fields should be submitted, by adding keys to the `credentials` object.
@@ -29,6 +30,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 user = result?.data || null;
 
                 if (!!user && result?.statusCode === 200) {
+                    delete user.NV102;
+                    delete user.NV104;
+                    delete user.NV105;
                     return user;
                 }
                 throw new InvalidEmailPasswordError();
@@ -52,6 +56,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
         authorized: async ({ auth }) => {
             return !!auth;
+        },
+        async redirect({ url, baseUrl }) {
+            return url.startsWith(baseUrl) ? url : baseUrl;
+        },
+        async signIn({ user, account, profile, email, credentials }) {
+            return true;
+        },
+    },
+    cookies: {
+        sessionToken: {
+            name: 'next-auth.session-token',
+            options: {
+                httpOnly: true,
+                sameSite: 'lax',
+            }
         }
-    }
+    },
+    debug: true
 });

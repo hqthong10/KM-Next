@@ -34,7 +34,7 @@ export default async function Demo() {
   const speaking = () => {
       // Kiểm tra trình duyệt hỗ trợ Web Speech API
       if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
-          const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+          const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
           const recognition = new SpeechRecognition();
 
           recognition.lang = "en-US"; // Ngôn ngữ (có thể đổi thành 'vi-VN' cho tiếng Việt)
@@ -73,15 +73,15 @@ export default async function Demo() {
     <main className="flex min-h-screen flex-col p-4 bg-white">
       <div className='flex flex-col gap-3 bg-slate-200 w-[450px] p-4'>
 
-        <Button color="primary" onClick={pronounce}>sound</Button>
+        <Button color="primary" onPress={pronounce}>sound</Button>
         <div> 
           <p>{text}</p>
-          <Button color="primary" variant="solid" className='bg-primary' onClick={speaking}>speak</Button>
+          <Button color="primary" variant="solid" className='bg-primary' onPress={speaking}>speak</Button>
         </div>
         <div>
           <Input />
           <p>{transOut}</p>
-          <Button color="primary" onClick={() => translate()}>transtale</Button>
+          <Button color="primary" onPress={() => translate()}>transtale</Button>
         </div>
 
       </div>
