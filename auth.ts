@@ -36,7 +36,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return user;
                 }
                 throw new InvalidEmailPasswordError();
-
             }
         })
     ],
@@ -73,5 +72,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
         }
     },
-    debug: true
+    debug: true,
+    secret: 'secret'
 });
