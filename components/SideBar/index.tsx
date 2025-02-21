@@ -16,11 +16,12 @@ export default function SideBar() {
     }
 
     return (
-        <div className={'fixed z-21 w-[250px] h-full top-0 left-0 flex flex-col bg-white gap-5 p-4 ' + styles.shadow}>
-            <Image src={'/images/logo.png'} alt='piepmark' width={100} height={50} />
+        <div className={'fixed z-21 w-[190px] h-full top-0 left-0 flex flex-col bg-white gap-5 p-4 ' + styles.shadow}>
+            {/* <Image src={'/images/logo.png'} alt='piepmark' width={100} height={50} /> */}
             <Link href="/">Home</Link>
             <Link href="/posts">Posts</Link>
             <Link href="/dictionary">Dictionary</Link>
+            <Link href="/sentences">Sentences</Link>
             
             <span className='h-full'></span>
             {user?.PN100! > 0 ? (

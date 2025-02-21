@@ -15,8 +15,28 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
+  const session = await auth();
   const user = session?.user as IUser;
+
+  let mainContent;
+  if(!user) {
+    // no login
+    mainContent = (
+      <div className='w-full'>
+        {children}
+      </div>
+    )
+  } else {
+    // logined
+    mainContent = (
+      <>
+        <SideBar  />
+        <div className='w-full pl-[190px]'>
+            {children}
+          </div>
+      </>
+    )
+  }
 
   return (
     <html lang="en" className='light'>
@@ -24,10 +44,7 @@ export default async function RootLayout({
       <body className={`${inter.className}`}>
         <Providers>
             <div className='flex'>
-              {!!user && <SideBar  />}
-              <div className='w-full pl-[250px]'>
-                  {children}
-              </div>
+              {mainContent}
             </div>
         </Providers>
       </body>
