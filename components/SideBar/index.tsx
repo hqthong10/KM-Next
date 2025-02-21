@@ -22,6 +22,7 @@ export default function SideBar() {
             <Link href="/posts">Posts</Link>
             <Link href="/dictionary">Dictionary</Link>
             <Link href="/sentences">Sentences</Link>
+            <Link href="/interviews">Interviews</Link>
             
             <span className='h-full'></span>
             {user?.PN100! > 0 ? (
