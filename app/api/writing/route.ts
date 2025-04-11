@@ -33,36 +33,19 @@ export async function POST(request: NextRequest) {
     const SV102 = body.SV102;
 
     const mutation = `
-        mutation s100_create($PS100: Number, $SV101: String, $SV102: String) {
+        mutation {
             s100_create(data: {
-                PS100: $PS100,
-                SV101: $SV101,
-                SV102: $SV102,
+                PS100: ${PS100},
+                SV101: "${SV101}",
+                SV102: "${SV102}",
             }){ PS100, SV101, SV102 }
         }
     `;
-
-    const variables = {
-        PS100,
-        SV101,
-        SV102
-    };
-
     const res = await sendRequest<IResponse>({
         url: `${API_SERVER_HOST}/graphql`,
         method: 'POST',
         data: {
-            // query: `
-            //     mutation {
-            //         s100_create(data: {
-            //             PS100: ${PS100},
-            //             SV101: ${SV101},
-            //             SV102: ${SV102},
-            //         }){ PS100, SV101, SV102 }
-            //     }
-            // `
             query: mutation,
-            variables: variables
         }
     });
     return NextResponse.json(res);

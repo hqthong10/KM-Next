@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { API_SERVER_HOST } from '@/utils/constant';
 
 const client = new ApolloClient({
-  uri: "http://localhost:3020/graphql", // Thay bằng API GraphQL của bạn
+  uri: `${API_SERVER_HOST}/graphql`, // Thay bằng API GraphQL của bạn
   cache: new InMemoryCache(),
 });
 

@@ -71,11 +71,11 @@ export default function SentencePage() {
         });
 
         // const ADD_USERS = gql`
-        //     mutation s100_create($PS100: Number, $SV101: String, $SV102: String) {
+        //     mutation {
         //         s100_create(data: {
-        //             PS100: $PS100,
-        //             SV101: $SV101,
-        //             SV102: $SV102,
+        //             PS100: 0,
+        //             SV101: "${inpEn.trim()}",
+        //             SV102: "${inpvi.trim()}",
         //         }){ PS100, SV101, SV102 }
         //     }
         // `;
@@ -87,11 +87,11 @@ export default function SentencePage() {
         // };
 
         // const response = await client.query({
-        //     query:ADD_USERS,
-        //     variables: variables
+        //     query: ADD_USERS,
+        //     // variables: variables
         // });
 
-        if (response!.data!.PS100 > 0) {
+        if (response!.data!.s100_create!.PS100 > 0) {
             setInpEn('');
             setInpVi('');
         }
