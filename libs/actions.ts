@@ -1,6 +1,5 @@
 "use server"
 import { signIn } from "@/auth";
-import { redirect } from "next/navigation";
 
 export async function authenticate(email: string, password: string) {
   try{
@@ -9,7 +8,6 @@ export async function authenticate(email: string, password: string) {
       password,
       redirect: false
     })
-    console.log('signIn', rs);
     return rs;
   } catch (error) {
     if((error as any).name === 'InvalidEmailPasswordError') {

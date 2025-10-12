@@ -41,3 +41,7 @@ jspm_packages
 **/*.DS_Store
 
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

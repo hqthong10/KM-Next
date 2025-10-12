@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { API_SERVER_HOST } from '@/utils/constant';
-import { sendRequest } from '@/libs/request';
+import { sendRequest, IResponse } from '@/libs/request';
 import { auth } from '@/auth';
 import { data } from 'autoprefixer';
 
@@ -10,21 +10,13 @@ export const revalidate = 60;
 export async function GET(request: Request) {
     const session = await auth();
     const user = session?.user as any;
-    console.log(user);
-    const res = await sendRequest({
+    const res = await sendRequest<IResponse>({
         url: `${API_SERVER_HOST}/w100`,
         method: 'GET',
         data: {
             FN100: user?.FN100 || 0
         }
     });
-    // const res2 = await fetch(`${API_SERVER_HOST}/w100`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // });
-    // const result = await res.json();
     return NextResponse.json(res);
 }
 
@@ -40,7 +32,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Missing wordId or status' }, { status: 400 });
     }
 
-    const result = await sendRequest({
+    const result = await sendRequest<IResponse>({
         method: 'POST',
         url: `${API_SERVER_HOST}/w100`,
         data: {

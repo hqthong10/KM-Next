@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { IResponse, sendRequest } from '@/libs/request';
 
-export default function Page() {
-    const [posts, setPosts] = useState([]);
+export default function SentencePage() {
+    const [list, setLists] = useState([]);
 
     const fetchData = async () => {
         try {
             const response: IResponse = await sendRequest<IResponse>({
-                url: '/api/posts',
+                url: '/api/sentences',
                 method: 'GET'
             });
 
-            setPosts(response!.data! || []);
+            setLists(response!.data! || []);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -27,12 +27,11 @@ export default function Page() {
 
     return (
         <main className="flex min-h-screen flex-col p-4 bg-white">
-            Welcome to page Post {posts.length}
             <ul>
-                {posts.map((post: any) => {
+                {list.map((post: any) => {
                     return (
                         <li>
-                            <Link href={`/posts/${post.PP100}`}>{post.PV101}</Link>
+                            {post.PV101}
                         </li>
                     );
                 })}

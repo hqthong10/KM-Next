@@ -1,8 +1,9 @@
 'use client';
-import { shuffle } from '@/utils/helper';
+import { sendRequest } from '@/libs/request';
+import { createArrayIndexes, shuffle } from '@/utils/helper';
 import { Button } from '@nextui-org/react';
+import { send } from 'process';
 import { useEffect, useRef, useState } from 'react';
-import { reqPost } from '@/libs/request';
 
 export default function WordLearn({ data }: { data: any[] }) {
     const [words, setWords] = useState<any[]>([]);
@@ -26,12 +27,9 @@ export default function WordLearn({ data }: { data: any[] }) {
     }, [current]);
 
     const setup = () => {
-        // setWordIndexs(Array.from({ length: data.length }, (_, index) => index));
-        // setWordIndexs(Array(data.length).fill(0).map((_, index) => index));
-        setWordIndexs(Array(data.length).keys().toArray());
+        createArrayIndexes(data.length);
         setWordIndexs((state) => state = [...shuffle(state)]);
         makeCard();
-        console.log(current, word, wordIndexs, wordIndexs[current-1], data[wordIndexs[current-1]]);
     }
 
     const makeCard = () => {
@@ -65,29 +63,30 @@ export default function WordLearn({ data }: { data: any[] }) {
     };
 
     const handleDoneWord = async () => {
-        const res = await fetch('/api/words/done', {
-            method: 'post',
-            body: JSON.stringify({
+        const res = await sendRequest<any>({
+            url: '/api/words/done',
+            method: 'POST',
+            data: {
                 PW100: word?.PW100 ?? 0,
                 FN100: word?.FN100 ?? 0
-            })
+            }
         });
-        const jsonData = await res.json();
-        if (jsonData?.data > 0) {
+        if (res?.data > 0) {
             handleNext();
         }
     };
 
     const handleUnDoneWord = async () => {
-        const res = await fetch('/api/words/fresh', {
-            method: 'post',
-            body: JSON.stringify({
+        const res = await sendRequest<any>({
+            url: '/api/words/fresh',
+            method: 'POST',
+            data: {
                 PW100: word?.PW100 ?? 0,
                 FN100: word?.FN100 ?? 0
-            })
+            }
         });
-        const jsonData = await res.json();
-        if (jsonData?.data > 0) {
+
+        if (res?.data > 0) {
             handleNext();
         }
     };
